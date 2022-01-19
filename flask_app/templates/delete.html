@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<body>
+	<div class="row">
+		<div class="col-12">
+			<div class="panel panel--raised" style="background-color: #f2f2f2; text-align:center;">
+				<form method="post">
+					<div class="row base-margin-bottom">
+						<div class="col-4"></div>
+						<div class="col-4">
+							<h1>{% block title %}<u>Delete ASA Firewall</u>{% endblock %}</h1>
+						</div>
+						<div class="col-4"></div>
+					</div>
+
+					<div class="row base-margin-bottom">
+            {% for firewall in firewalls %}
+            <div class="col-12">
+              <input type="checkbox" id="{{ firewall.id }}" name="asa" value="{{ firewall.id }}">
+              <label for="{{ firewall.id }}">ASA IP Address: {{ firewall.ip }}</label><br>
+						</div>
+            {% endfor %}
+					</div>
+          <div class="row base-margin-bottom">
+						<div class="col-4"></div>
+						<div class="col-4">
+							<input class="btn btn--secondary btn--justified" type="submit" value="Delete Firewall" style="background-color:#0F223F;">
+						</div>
+						<div class="col-4"></div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+
+{% endblock %}

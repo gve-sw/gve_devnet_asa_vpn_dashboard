@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="responsive-table">
+  <table class="table table--lined table--wrapped" aria-label="Wrapped table example" id="loadBalancing">
+    <thead>
+      <tr>
+        <th>ASA IP Address</th>
+        <th>Status</th>
+        <th>Role</th>
+        <th>Cluster IP Address</th>
+        <th>AnyConnect Load Percentage<span class="sort-indicator icon-dropdown" onclick="sortTableByAnyConnect()"</span></th>
+        <th>Other Load Percentage<span class="sort-indicator icon-dropdown" onclick="sortTableByOther()"</span></th>
+        <th>Inactive Load Percentage<span class="sort-indicator icon-dropdown" onclick="sortTableByInactive()"</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for entry in info %}
+      <tr>
+        <td>{{ entry.ip }}</td>
+        <td>{{ entry.status }}</td>
+        <td>{{ entry.role }}</td>
+        <td>{{ entry.cluster_ip }}</td>
+        <td>{{ entry.anyconnect_load }}</td>
+        <td>{{ entry.other_load }}</td>
+        <td>{{ entry.inactive_load }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<script>
+  function sortTableByAnyConnect() {
+      var table, rows, switching, i, x, y, shouldSwitch;
+      table = document.getElementById("loadBalancing");
+      switching = true;
+      /* Make a loop that will continue until
+ no switching has been done: */
+      while (switching) {
+          // Start by saying: no switching is done:
+          switching = false;
+          rows = table.rows;
+          /* Loop through all table rows (except the
+ first, which contains table headers): */
+          for (i = 1; i < (rows.length - 1); i++) {
+              // Start by saying there should be no switching:
+              shouldSwitch = false;
+              /* Get the two elements you want to compare,
+ one from current row and one from the next: */
+              x = rows[i].getElementsByTagName("TD")[4];
+              y = rows[i + 1].getElementsByTagName("TD")[4];
+              // Check if the two rows should switch place,
+              if (x.innerHTML > y.innerHTML) {
+                  // If so, mark as a switch and break the loop
+                  shouldSwitch = true;
+                  break;
+              }
+          }
+          if (shouldSwitch) {
+              /* If a switch has been marked, make the switch
+ and mark that a switch has been done: */
+              rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+              switching = true;
+          }
+      }
+      console.log("Sorting by AnyConnect")
+  }
+  function sortTableByOther() {
+      var table, rows, switching, i, x, y, shouldSwitch;
+      table = document.getElementById("loadBalancing");
+      switching = true;
+      /* Make a loop that will continue until
+ no switching has been done: */
+      while (switching) {
+          // Start by saying: no switching is done:
+          switching = false;
+          rows = table.rows;
+          /* Loop through all table rows (except the
+ first, which contains table headers): */
+          for (i = 1; i < (rows.length - 1); i++) {
+              // Start by saying there should be no switching:
+              shouldSwitch = false;
+              /* Get the two elements you want to compare,
+ one from current row and one from the next: */
+              x = rows[i].getElementsByTagName("TD")[5];
+              y = rows[i + 1].getElementsByTagName("TD")[5];
+              // Check if the two rows should switch place,
+              if (x.innerHTML > y.innerHTML) {
+                  // If so, mark as a switch and break the loop
+                  shouldSwitch = true;
+                  break;
+              }
+          }
+          if (shouldSwitch) {
+              /* If a switch has been marked, make the switch
+ and mark that a switch has been done: */
+              rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+              switching = true;
+          }
+      }
+      console.log("Sorting by Other")
+  }
+  function sortTableByInactive() {
+      var table, rows, switching, i, x, y, shouldSwitch;
+      table = document.getElementById("loadBalancing");
+      switching = true;
+      /* Make a loop that will continue until
+ no switching has been done: */
+      while (switching) {
+          // Start by saying: no switching is done:
+          switching = false;
+          rows = table.rows;
+          /* Loop through all table rows (except the
+ first, which contains table headers): */
+          for (i = 1; i < (rows.length - 1); i++) {
+              // Start by saying there should be no switching:
+              shouldSwitch = false;
+              /* Get the two elements you want to compare,
+ one from current row and one from the next: */
+              x = rows[i].getElementsByTagName("TD")[6];
+              y = rows[i + 1].getElementsByTagName("TD")[6];
+              // Check if the two rows should switch place,
+              if (x.innerHTML > y.innerHTML) {
+                  // If so, mark as a switch and break the loop
+                  shouldSwitch = true;
+                  break;
+              }
+          }
+          if (shouldSwitch) {
+              /* If a switch has been marked, make the switch
+ and mark that a switch has been done: */
+              rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+              switching = true;
+          }
+      }
+      console.log("Sorting by Inactive")
+  }
+
+</script>
+{% endblock %}

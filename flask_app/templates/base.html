@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>ASA Dashboard</title>
+
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/cui-standard.min.css') }}">
+    <style>
+      .grid-container {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        background-color: #2196f3;
+        padding: 10px;
+      }
+      .grid-item {
+        background-color: rgba(255, 255, 255, 0.8);
+        border: 1px solid rgba(0, 0, 0, 0.8);
+        padding: 20px;
+        font-size: 30px;
+        text-align: center;
+      }
+    </style>
+		<script src="{{ url_for('static', filename='js/styleguide.js') }}"></script>
+		<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	</head>
+
+	<body class="cui">
+		<!-- HEADER ROW -->
+		<div class="row">
+			<div class="col-12 dbl-margin-bottom">
+				<header class="header" style="background-color:#0F223F; overflow:hidden; position:fixed; left:0;">
+					<div class="container">
+						<div class="header-panels">
+              <a class="header__logo qtr-margin-top" href="https://www.cisco.com/" target="_blank">
+                <span><img src="{{ url_for('static', filename='img/logo.png') }}" style="height:75px; width:150px;"></span>
+              </a>
+              <div class="header-panel">
+								<div class="header__title">ASA Dashboard</div>
+							</div>
+						</div>
+				   </div>
+				</header>
+			</div>
+		</div>
+<!-- PAGE CONTENT -->
+		<div class="row">
+			<!-- PAGE NAVBAR -->
+			<nav class="sidebar col-2 dbl-margin-top" role="navigation">
+				<ul>
+          <li class="sidebar__item"><span>-</span></li>
+          {% if current_user.is_authenticated %}
+          <li class="sidebar__item">
+            <a href="{{ url_for('main.home') }}">
+							<span class="icon-home"></span>
+							<span>Home</span>
+            </a>
+					</li>
+					<li class="divider"></li>
+					<li class="sidebar__item">
+            <a href="{{ url_for('main.add') }}">
+							<span class="icon-add-contain"></span>
+							<span>Add Firewall</span>
+						</a>
+					</li>
+					<li class="divider"></li>
+					<li class="sidebar__item">
+            <a href="{{ url_for('main.delete') }}">
+							<span class="icon-trash"></span>
+							<span>Delete Firewall</span>
+						</a>
+					</li>
+					<li class="divider"></li>
+					<li class="sidebar__item">
+            <a href="{{ url_for('main.loadBalancing') }}">
+							<span class="icon-trash"></span>
+							<span>Show Load Balancing</span>
+						</a>
+					</li>
+					<li class="divider"></li>
+					<li class="sidebar__item">
+            <a href="{{ url_for('auth.logout') }}">
+							<span class="icon-exit-outline"></span>
+              <span>Logout</span>
+						</a>
+					</li>
+					<li class="divider"></li>
+          {% else %}
+					<li class="sidebar__item">
+						<a href="{{ url_for('auth.login') }}">
+							<span class="icon-contact"></span>
+							<span>Log In</span>
+						</a>
+					</li>
+					<li class="divider"></li>
+					<li class="sidebar__item">
+						<a href="{{ url_for('auth.register') }}">
+							<span class="icon-add-contain"></span>
+							<span>Register</span>
+						</a>
+					</li>
+					<li class="divider"></li>
+					{% endif %}
+
+				</ul>
+			</nav>
+
+			<!-- MAIN CONTENT -->
+			<div class="col-10 base-margin-top">
+				<div class="panel panel-well">
+					<section class="content">
+						<header>{% block header %} {% endblock %}</header>
+						{% for message in get_flashed_messages() %}
+						<div class="flash">{{ message }}</div>
+						{% endfor %}
+
+						<div class="panel">
+							{% block content %} {% endblock %}
+						</div>
+					</section>
+				</div>
+			</div>
+		</div>
+	</body>
+	<footer class="footer footer--dark col-12" style="background-color:#0F223F; position:fixed; bottom:0;">
+		<div class="footer__links">
+			<ul class="list list--inline">
+				<li><a href="http://www.cisco.com/cisco/web/siteassets/contacts/index.html" target="_blank">Contacts</a></li>
+				<li><a href="https://secure.opinionlab.com/ccc01/o.asp?id=jBjOhqOJ" target="_blank">Feedback</a></li>
+				<li><a href="https://www.cisco.com/c/en/us/about/help.html" target="_blank">Help</a></li>
+				<li><a href="http://www.cisco.com/c/en/us/about/sitemap.html" target="_blank">Site Map</a></li>
+				<li><a href="https://www.cisco.com/c/en/us/about/legal/terms-conditions.html" target="_blank">Terms & Conditions</a></li></li>
+				<li><a href="https://www.cisco.com/c/en/us/about/legal/privacy-full.html" target="_blank">Privacy Statement</a></li>
+				<li><a href="https://www.cisco.com/c/en/us/about/legal/privacy-full.html#cookies" target="_blank">Cookie Policy</a></li>
+				<li><a href="https://www.cisco.com/c/en/us/about/legal/trademarks.html" target="_blank">Trademarks</a></li>
+			</ul>
+		</div>
+	</footer>
+</html>

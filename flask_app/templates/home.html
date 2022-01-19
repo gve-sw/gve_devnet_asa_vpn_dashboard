@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<body>
+<div class="panel panel--loose panel--secondary dbl-padding">
+    <div class="row">
+        <div class="col-md-8">
+            <h4 class="no-margin">Welcome to</h4>
+            <h1 class="display-0">
+                <span>ASA <span class="text-primary">Dashboard</span></span>
+            </h1>
+        </div>
+        <div class="col-md-4">
+          <img src="{{ url_for('static', filename='img/firewall.png') }}">
+        </div>
+    </div>
+</div>
+<div class="row">
+  {% for firewall in firewalls %}
+    <div class="col-lg-3 col-md-6 col-12">
+      <div class="panel panel--bordered panel--raised panel--loose" id="{{ firewall.id }}" name="firewall">
+          <div class="subtitle">{{ firewall.name }}</div>
+          <small>{{ firewall.model }}</small>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="text-small">IP ADDRESS</div>
+                    <div class="text-normal">{{ firewall.ip }}</div>
+                    <div class="text-small base-margin-top">UPTIME</div>
+                    <div class="text-normal">{{ firewall.uptime }}</div>
+                    <div class="text-small base-margin-top">SERIAL NUMBER</div>
+                    <div class="text-normal">{{ firewall.serial }}</div>
+                </div>
+                <div class="col-md-6">
+                    <div class="text-small">SOFTWARE</div>
+                    <div class="text-normal">{{ firewall.software_version }}</div>
+                    <div class="text-small base-margin-top">LICENSE MODE</div>
+                    <div class="text-normal">{{ firewall.license_mode }}</div>
+                </div>
+            </div>
+            <hr>
+            <div class="flex flex-between base-margin-top">
+              <form method="post">
+                <input type="hidden" name="firewall" value="{{ firewall.id }}">
+                <input type="hidden" name="function" value="VPN Clients">
+							  <input class="btn btn--secondary btn--justified" type="submit" value="Show VPN Clients" style="background-color:#0F223F;">
+              </form>
+            </div>
+        </div>
+    </div>
+  {% endfor %}
+</div>
+</body>
+
+
+
+{% endblock %}

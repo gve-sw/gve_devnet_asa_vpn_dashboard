@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-12">
+			<div class="panel panel--raised" style="background-color: #f2f2f2; text-align:center;">
+				<form method="post">
+					<div class="row base-margin-bottom">
+						<div class="col-4"></div>
+						<div class="col-4">
+							<h1>{% block title %}<u>Add ASA Firewall</u>{% endblock %}</h1>
+						</div>
+						<div class="col-4"></div>
+					</div>
+
+					<div class="row base-margin-bottom">
+						<div class="col-2">
+							<h5>Firewall:</h5>
+						</div>
+						<div class="col-2">
+							<label for="asa_host">Host:</label>
+							<input type="asa_host" name="asa_host" id="asa_host">
+						</div>
+						<div class="col-2">
+							<label for="asa_username">Username:</label>
+							<input name="asa_username" id="asa_username">
+						</div>
+						<div class="col-2">
+							<label for="asa_password">Password:</label>
+							<input type="asa_password" name="asa_password" id="asa_password">
+						</div>
+					</div>
+          <div class="row base-margin-bottom">
+						<div class="col-4"></div>
+						<div class="col-4">
+							<input class="btn btn--secondary btn--justified" type="submit" value="Add Firewall" style="background-color:#0F223F;">
+						</div>
+						<div class="col-4"></div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
