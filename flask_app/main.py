@@ -16,7 +16,6 @@ from flask import Flask, render_template, redirect, request, url_for, jsonify, B
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import login_required, current_user
 from . import sql_db
-from .db import *
 from .asav import *
 from .vpnClient import VPN_Client
 from .models import Firewall
